@@ -36,7 +36,7 @@ Gateway:
 The gateway flash drive should be flashed with the "ThingBox" image.
 Download it at this [link](http://thethingbox.io/index.html#packagestable).
 Unzip it.
-Flash the downloaded image (.img) with (unetbootin)[https://unetbootin.github.io/].
+Flash the downloaded image (.img) with [unetbootin](https://unetbootin.github.io/).
 
 You are now ready to boot your gateway!
 Plug the Gateway in CN network with cable.
@@ -46,23 +46,35 @@ To find out its IP, issue:
 nmap -sP 192.168.8.0/24
 ```
 Repeat with and without the cable plugged. The difference should show you its IP.
-Now open your browser on the given IP:
+SSH inside the raspberry (password: raspberry):
 
 ```
-firefox http://192.168.8.71/
+ssh root@192.168.8.71
 ```
-This should display the Node-RED interface.
-Click on Menu/Import/Clipboard and paste the following network in this (file)[./LoRaTrento].
 
-
-
-
-The LoRa library should be installed, using this [method](https://www.cooking-hacks.com/documentation/tutorials/extreme-range-lora-sx1272-module-shield-arduino-raspberry-pi-intel-galileo/#step4_2).
+Once inside the raspberry, install the LoRa library using this [method](https://www.cooking-hacks.com/documentation/tutorials/extreme-range-lora-sx1272-module-shield-arduino-raspberry-pi-intel-galileo/#step4_2).
 
 ```
 wget http://www.cooking-hacks.com/media/cooking/images/documentation/raspberry_arduino_shield/raspberrypi2.zip && unzip raspberrypi2.zip && cd cooking/arduPi && chmod +x install_arduPi && ./install_arduPi && rm install_arduPi && cd ../..
 wget http://www.cooking-hacks.com/media/cooking/images/documentation/tutorial_SX1272/arduPi-api_LoRa_v1_4.zip && unzip -u arduPi-api_LoRa_v1_4.zip && cd cooking/examples/LoRa && chmod +x cook.sh && cd ../../..  
 ```
+
+Start the receiver program from the LoRa examples:
+
+```
+cd cooking/examples/LoRa
+./cook.sh SX_00_CONFIG_LoRa.cpp
+```
+
+Now open your browser using the given IP:
+
+```
+firefox http://192.168.8.71/
+```
+This should display the Node-RED interface.
+Click on Menu/Import/Clipboard and paste the network from this (file)[./LoRaTrento].
+
+
 
 
 Deployment
