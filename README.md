@@ -59,9 +59,21 @@ wget http://www.cooking-hacks.com/media/cooking/images/documentation/raspberry_a
 wget http://www.cooking-hacks.com/media/cooking/images/documentation/tutorial_SX1272/arduPi-api_LoRa_v1_4.zip && unzip -u arduPi-api_LoRa_v1_4.zip && cd cooking/examples/LoRa && chmod +x cook.sh && cd ../../..  
 ```
 
+
+
+
+### Sensors
+
+Install the code from this [repo](https://github.com/hdoukas/lora_openiot/tree/master/Arduino_code).
+
+
+Running
+-------
+
 Start the receiver program from the LoRa examples:
 
 ```
+ssh root@192.168.8.71
 cd cooking/examples/LoRa
 ./cook.sh SX_00_CONFIG_LoRa.cpp
 ./SX_00_CONFIG_LoRa.cpp_exe
@@ -72,13 +84,12 @@ Now open your browser using the given IP:
 ```
 firefox http://192.168.8.71/
 ```
+
 This should display the Node-RED interface.
 Click on Menu/Import/Clipboard and paste the network from this [file](./LoRaTrento).
-
-
-### Sensors
-
-Install the code from this [repo](https://github.com/hdoukas/lora_openiot/tree/master/Arduino_code).
+Start the network using the button "Activate".
+If the sensor board is running, you should see the network blinking.
+The data is uploaded on the RaptorBox website.
 
 
 Deployment
