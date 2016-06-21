@@ -31,7 +31,7 @@ Sensor board:
 Software installation
 ---------------------
 
-Gateway:
+### Gateway:
 
 The gateway flash drive should be flashed with the "ThingBox" image.
 Download it at this [link](http://thethingbox.io/index.html#packagestable).
@@ -76,16 +76,20 @@ This should display the Node-RED interface.
 Click on Menu/Import/Clipboard and paste the network from this [file](./LoRaTrento).
 
 
+### Sensors
+
+Install the code from this (repo)[https://github.com/hdoukas/lora_openiot/tree/master/Arduino_code].
 
 
 Deployment
 ----------
 
-- Gateway to Raff + WiFi dongle
-- Gateway to Fabio + WiFi dongle
-- Gateway to Corentin + WiFi dongle
-- Gateway to Andrea + WiFi dongle
-- Gateway in CNET (already there for meeting rooms)
+- Raffaele's home
+- Fabio's home
+- Corentin's home
+- Andrea's home
+- Abdur's home 
+- CNET offices (already there for meeting rooms)
 
 
 
