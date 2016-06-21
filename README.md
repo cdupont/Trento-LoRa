@@ -64,6 +64,7 @@ Start the receiver program from the LoRa examples:
 ```
 cd cooking/examples/LoRa
 ./cook.sh SX_00_CONFIG_LoRa.cpp
+./SX_00_CONFIG_LoRa.cpp_exe
 ```
 
 Now open your browser using the given IP:
@@ -72,7 +73,7 @@ Now open your browser using the given IP:
 firefox http://192.168.8.71/
 ```
 This should display the Node-RED interface.
-Click on Menu/Import/Clipboard and paste the network from this (file)[./LoRaTrento].
+Click on Menu/Import/Clipboard and paste the network from this [file](./LoRaTrento).
 
 
 
@@ -80,11 +81,11 @@ Click on Menu/Import/Clipboard and paste the network from this (file)[./LoRaTren
 Deployment
 ----------
 
-Gateway to Raff + WiFi dongle
-Gateway to Fabio + WiFi dongle
-Gateway to Corentin + WiFi dongle
-Gateway to Andrea + WiFi dongle
-Gateway in CNET (already there for meeting rooms)
+- Gateway to Raff + WiFi dongle
+- Gateway to Fabio + WiFi dongle
+- Gateway to Corentin + WiFi dongle
+- Gateway to Andrea + WiFi dongle
+- Gateway in CNET (already there for meeting rooms)
 
 
 
