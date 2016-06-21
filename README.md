@@ -2,12 +2,12 @@
 Trento LoRa experiment
 ======================
 
-The LoRa experiment is a sensing network deployed in Trento.
+The Trento LoRa experiment is a sensing network deployed in Trento.
 It measures temperature in various points in Trento and is based on a LoRa network.
-It is based on a Raspberry PI for the Gateway and an Arduino for the sensor board.
+It uses a Raspberry PI for the Gateway and an Arduino for the sensor board.
 The Arduino board is measuring the ambient temperature and broadcasting the readings through the LoRa network.
 The Raspberry gets the readings and decode them using a small Node-RED dataflow program.
-The Node-RED program then uploads the results on the RaptorBox Cloud instance through it API.
+The Node-RED program then uploads the results on the RaptorBox Cloud instance through its API.
 
 Hardware
 --------
@@ -78,7 +78,7 @@ Click on Menu/Import/Clipboard and paste the network from this [file](./LoRaTren
 
 ### Sensors
 
-Install the code from this (repo)[https://github.com/hdoukas/lora_openiot/tree/master/Arduino_code].
+Install the code from this [repo](https://github.com/hdoukas/lora_openiot/tree/master/Arduino_code).
 
 
 Deployment
