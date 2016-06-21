@@ -31,7 +31,7 @@ Sensor board:
 Software installation
 ---------------------
 
-### Gateway:
+### Gateway
 
 The gateway flash drive should be flashed with the "ThingBox" image.
 Download it at this [link](http://thethingbox.io/index.html#packagestable).
