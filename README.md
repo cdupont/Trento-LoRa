@@ -64,8 +64,21 @@ wget http://www.cooking-hacks.com/media/cooking/images/documentation/tutorial_SX
 
 ### Sensors
 
-Install the code from this [repo](https://github.com/hdoukas/lora_openiot/tree/master/Arduino_code).
+Install Arduino GUI on your PC from [here](https://www.arduino.cc/en/Main/Software)
+Run Arduino GUI.
+Import the LoRa library into Arduino GUI:
 
+```
+wget http://www.cooking-hacks.com/media/cooking/images/documentation/tutorial_SX1272/SX1272_library_arduino_v1.4.zip
+unzip SX1272_library_arduino_v1.4.zip
+```
+Click on `Sketch/Include Library/import .ZIP library` and select the file arduinoLoRa_v1_4.zip.
+
+Copy the code from this [repo](https://github.com/hdoukas/lora_openiot/tree/master/Arduino_code).
+
+Select the correct port in the menu "Tools" and open the Serial Monitor.
+Upload the code.
+You should see the messages with the measurements being send in the serial monitor.
 
 Running
 -------
@@ -75,10 +88,11 @@ Start the receiver program from the LoRa examples:
 ```
 ssh root@192.168.8.71
 cd cooking/examples/LoRa
-./cook.sh SX_00_CONFIG_LoRa.cpp
-./SX_00_CONFIG_LoRa.cpp_exe
+./cook.sh LoRa_gateway_RX.cpp
+./LoRa_gateway_RX.cpp_exe
 ```
 
+You should see the messages being received.
 Now open your browser using the given IP:
 
 ```
