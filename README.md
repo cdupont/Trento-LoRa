@@ -106,6 +106,17 @@ If the sensor board is running, you should see the network blinking.
 The data is uploaded on the RaptorBox website.
 
 
+Testing
+-------
+
+Once the gateway and sensor node running, the data should be uploaded to Raptor.
+You can see the data by issuing:
+
+```
+curl -XGET -k  https://api.raptorbox.eu/6da85a54-c7ca-49e4-a309-964549b67476/streams/environmentaldata -H"Authorization: Bearer d28bcf86fa9623f8bf67257c432866469d8044f7"
+```
+
+
 Deployment
 ----------
 
