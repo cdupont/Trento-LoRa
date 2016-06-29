@@ -73,6 +73,7 @@ wget http://www.cooking-hacks.com/media/cooking/images/documentation/tutorial_SX
 unzip SX1272_library_arduino_v1.4.zip
 ```
 Click on `Sketch/Include Library/import .ZIP library` and select the file arduinoLoRa_v1_4.zip.
+Do the same with the file arduino-api_v1_4.zip.
 
 Copy the code from this [repo](https://github.com/hdoukas/lora_openiot/tree/master/Arduino_code).
 
