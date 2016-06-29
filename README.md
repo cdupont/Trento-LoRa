@@ -64,7 +64,7 @@ wget http://www.cooking-hacks.com/media/cooking/images/documentation/tutorial_SX
 
 ### Sensors
 
-Install Arduino GUI on your PC from [here](https://www.arduino.cc/en/Main/Software)
+Install Arduino GUI on your PC from [here](https://www.arduino.cc/en/Main/Software).
 Run Arduino GUI.
 Import the LoRa library into Arduino GUI:
 
