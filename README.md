@@ -59,10 +59,14 @@ wget http://www.cooking-hacks.com/media/cooking/images/documentation/raspberry_a
 wget http://www.cooking-hacks.com/media/cooking/images/documentation/tutorial_SX1272/arduPi-api_LoRa_v1_4.zip && unzip -u arduPi-api_LoRa_v1_4.zip && cd cooking/examples/LoRa && chmod +x cook.sh && cd ../../..  
 ```
 
+Install additional softwares:
+
+```
+sudo apt-get install vim tmux
+```
 
 
-
-### Sensors
+### Sensor node
 
 Install Arduino GUI on your PC from [here](https://www.arduino.cc/en/Main/Software).
 Run Arduino GUI.
@@ -105,6 +109,17 @@ Click on Menu/Import/Clipboard and paste the network from this [file](./LoRaTren
 Start the network using the button "Activate".
 If the sensor board is running, you should see the network blinking.
 The data is uploaded on the RaptorBox website.
+
+Configuration
+-------------
+
+In order to restart when the gateway in rebooted, the sender program need to be started at boot-up:
+
+In /etc/rc.local, add:
+```
+tmux new-session -d "/root/cooking/examples/LoRa/LoRa_gateway_RX.cpp_exe &"
+```
+
 
 
 Testing
