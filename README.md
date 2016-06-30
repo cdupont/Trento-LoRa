@@ -126,10 +126,13 @@ Testing
 -------
 
 Once the gateway and sensor node running, the data should be uploaded to Raptor.
-You can see the data by issuing:
+You can monitor the data uploaded in Raptorbox with the commands:
 
 ```
-curl -XGET -k  https://api.raptorbox.eu/6da85a54-c7ca-49e4-a309-964549b67476/streams/environmentaldata -H"Authorization: Bearer d28bcf86fa9623f8bf67257c432866469d8044f7"
+$ sudo apt-get install jq
+$ echo "curl -XGET -k  https://api.raptorbox.eu/6da85a54-c7ca-49e4-a309-964549b67476/streams/environmentaldata -H\"Authorization: Bearer d28bcf86fa9623f8bf67257c432866469d8044f7\"" >> getRaptor
+$ sudo chmod a+x getRaptor
+$ watch -n 1 "./getRaptor | jq '.data | .[length -1]'"
 ```
 
 
