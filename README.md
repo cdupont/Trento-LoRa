@@ -59,12 +59,16 @@ wget http://www.cooking-hacks.com/media/cooking/images/documentation/raspberry_a
 wget http://www.cooking-hacks.com/media/cooking/images/documentation/tutorial_SX1272/arduPi-api_LoRa_v1_4.zip && unzip -u arduPi-api_LoRa_v1_4.zip && cd cooking/examples/LoRa && chmod +x cook.sh && cd ../../..  
 ```
 
+Install additional softwares:
+
+```
+sudo apt-get install vim tmux
+```
 
 
+### Sensor node
 
-### Sensors
-
-Install Arduino GUI on your PC from [here](https://www.arduino.cc/en/Main/Software)
+Install Arduino GUI on your PC from [here](https://www.arduino.cc/en/Main/Software).
 Run Arduino GUI.
 Import the LoRa library into Arduino GUI:
 
@@ -73,6 +77,7 @@ wget http://www.cooking-hacks.com/media/cooking/images/documentation/tutorial_SX
 unzip SX1272_library_arduino_v1.4.zip
 ```
 Click on `Sketch/Include Library/import .ZIP library` and select the file arduinoLoRa_v1_4.zip.
+Do the same with the file arduino-api_v1_4.zip.
 
 Copy the code from this [repo](https://github.com/hdoukas/lora_openiot/tree/master/Arduino_code).
 
@@ -105,15 +110,29 @@ Start the network using the button "Activate".
 If the sensor board is running, you should see the network blinking.
 The data is uploaded on the RaptorBox website.
 
+Configuration
+-------------
+
+In order to restart when the gateway in rebooted, the sender program need to be started at boot-up:
+
+In /etc/rc.local, add:
+```
+tmux new-session -d "/root/cooking/examples/LoRa/LoRa_gateway_RX.cpp_exe &"
+```
+
+
 
 Testing
 -------
 
 Once the gateway and sensor node running, the data should be uploaded to Raptor.
-You can see the data by issuing:
+You can monitor the data uploaded in Raptorbox with the commands:
 
 ```
-curl -XGET -k  https://api.raptorbox.eu/6da85a54-c7ca-49e4-a309-964549b67476/streams/environmentaldata -H"Authorization: Bearer d28bcf86fa9623f8bf67257c432866469d8044f7"
+$ sudo apt-get install jq
+$ echo "curl -XGET -k  https://api.raptorbox.eu/6da85a54-c7ca-49e4-a309-964549b67476/streams/environmentaldata -H\"Authorization: Bearer d28bcf86fa9623f8bf67257c432866469d8044f7\"" >> getRaptor
+$ sudo chmod a+x getRaptor
+$ watch -n 1 "./getRaptor | jq '.data | .[length -1]'"
 ```
 
 
