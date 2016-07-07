@@ -79,7 +79,8 @@ unzip SX1272_library_arduino_v1.4.zip
 Click on `Sketch/Include Library/import .ZIP library` and select the file arduinoLoRa_v1_4.zip.
 Do the same with the file arduino-api_v1_4.zip.
 
-Copy the code from this [repo](https://github.com/hdoukas/lora_openiot/tree/master/Arduino_code).
+Copy the code from this [file](sensor-node/LoRaTest.ino).
+Add additional libraries: [DHT](https://github.com/Seeed-Studio/Grove_Temperature_And_Humidity_Sensor), [Barometer](http://www.seeedstudio.com/wiki/File:Barometer_Sensor.zip)
 
 Select the correct port in the menu "Tools" and open the Serial Monitor.
 Upload the code.
