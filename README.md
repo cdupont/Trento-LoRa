@@ -147,6 +147,20 @@ Deployment
 - Abdur's home 
 - CNET offices (already there for meeting rooms)
 
+### Gateway access
+
+In order to access the gateways from CN when they will be installed at home in local networks, it is necessary to install a [reverse ssh tunnel](http://unix.stackexchange.com/questions/46235/how-does-reverse-ssh-tunneling-work).
+
+Add this line to /etc/rc.local:
+```
+ssh -f -N -T -R22222:localhost:22 ubuntu@217.77.95.65
+```
+This will create a reverse tunnel from the raspberry to the server at 217.77.95.65 (in this case a SIRIS VM).
+Then from the SIRIS VM it is possible to ssh to the raspberry:
+```
+ssh -p 22222 root@localhost
+```
+The tunnel port (22222) need to be different for each gateway.
 
 
 
