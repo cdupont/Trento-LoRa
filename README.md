@@ -62,9 +62,10 @@ wget http://www.cooking-hacks.com/media/cooking/images/documentation/tutorial_SX
 Install additional softwares:
 
 ```
-sudo apt-get install vim tmux
+sudo apt-get autossh
+sudo apt-get install sysv-rc-conf -y
 ```
-
+Import Node-Red logic with Export/Import via clipboard from another Gateway already up&running
 
 ### Sensor node
 
@@ -94,6 +95,11 @@ Start the receiver program from the LoRa examples:
 ```
 ssh root@192.168.8.71
 cd cooking/examples/LoRa
+
+```
+create the file measures.txt
+
+```
 ./cook.sh LoRa_gateway_RX.cpp
 ./LoRa_gateway_RX.cpp_exe
 ```
@@ -102,7 +108,7 @@ You should see the messages being received.
 Now open your browser using the given IP:
 
 ```
-firefox http://192.168.8.71/
+http://192.168.8.71/
 ```
 
 This should display the Node-RED interface.
@@ -116,6 +122,7 @@ Configuration
 
 In order to restart when the gateway in rebooted, the sender program need to be started at boot-up:
 
+Copy the lora [file]
 In /etc/rc.local, add:
 ```
 tmux new-session -d "/root/cooking/examples/LoRa/LoRa_gateway_RX.cpp_exe &"
