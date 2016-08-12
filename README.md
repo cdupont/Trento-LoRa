@@ -120,7 +120,8 @@ Configuration
 
 In order to restart when the gateway in rebooted, the sender program need to be started at boot-up:
 
-Copy the lora [file]
+in /etc/init.d folder 
+Copy this [file] (./lora)
 In /etc/rc.local, add:
 ```
 tmux new-session -d "/root/cooking/examples/LoRa/LoRa_gateway_RX.cpp_exe &"
