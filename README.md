@@ -124,7 +124,7 @@ in /etc/init.d folder copy this [file] (./gateway/ssh-LoRa-autoreboot-config/lor
 
 Then launch in a terminal
 
-#sysv-rc-conf
+$ sysv-rc-conf
 
 and select for lora service rcx.d with x 2,3,4,5
 
@@ -163,10 +163,10 @@ In /etc/systemd/system folder copy this [file] (./gateway/ssh-LoRa-autoreboot-co
 
 Then launch in a terminal:
 
-#systemctl daemon-reload
-#systemctl start autossh.service
-#systemctl status autossh.service (In order to check if the autossh service is running correctly)
-#systemctl enable autossh.service (Enable autossh.service to be started on bootup)
+$ systemctl daemon-reload
+$ systemctl start autossh.service
+$ systemctl status autossh.service (In order to check if the autossh service is running correctly)
+$ systemctl enable autossh.service (Enable autossh.service to be started on bootup)
 
 You can now reboot the gateway
 
