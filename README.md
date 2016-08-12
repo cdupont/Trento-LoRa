@@ -121,11 +121,14 @@ Configuration
 In order to restart LoRa when the gateway in rebooted, the sender program need to be started at boot-up:
 
 in /etc/init.d folder copy this [file] (./gateway/ssh-LoRa-autoreboot-config/lora)
+
 Then launch in a terminal
 
 #sysv-rc-conf
 
 and select for lora service rcx.d with x 2,3,4,5
+
+Now you can reboot the gtateway and the LoRa sender will start automatically.
 
 
 Testing
@@ -156,18 +159,24 @@ Deployment
 
 In order to access the gateways from CN when they will be installed at home in local networks, it is necessary to install a [reverse ssh tunnel](http://unix.stackexchange.com/questions/46235/how-does-reverse-ssh-tunneling-work).
 
-In /etc/systemd/system folder copy this [file] (./gateway/ssh-LoRa-autoreboot-config/systemd-config)
-Then launch in a terminal
-Add this line to /etc/rc.local:
-```
-ssh -f -N -T -R22222:localhost:22 ubuntu@217.77.95.65
-```
+In /etc/systemd/system folder copy this [file] (./gateway/ssh-LoRa-autoreboot-config/autossh.service)
+
+Then launch in a terminal:
+
+#systemctl daemon-reload
+#systemctl start autossh.service
+#systemctl status autossh.service (In order to check if the autossh service is running correctly)
+#systemctl enable autossh.service (Enable autossh.service to be started on bootup)
+
+You can now reboot the gateway
+
 This will create a reverse tunnel from the raspberry to the server at 217.77.95.65 (in this case a SIRIS VM).
 Then from the SIRIS VM it is possible to ssh to the raspberry:
+
 ```
 ssh -p 22222 root@localhost
 ```
-The tunnel port (22222) need to be different for each gateway.
+The tunnel port (22221,2,3,4) need to be different for each gateway.
 
 
 
