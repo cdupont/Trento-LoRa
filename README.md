@@ -118,15 +118,14 @@ The data is uploaded on the RaptorBox website.
 Configuration
 -------------
 
-In order to restart when the gateway in rebooted, the sender program need to be started at boot-up:
+In order to restart LoRa when the gateway in rebooted, the sender program need to be started at boot-up:
 
-in /etc/init.d folder 
-Copy this [file] (./lora)
-In /etc/rc.local, add:
-```
-tmux new-session -d "/root/cooking/examples/LoRa/LoRa_gateway_RX.cpp_exe &"
-```
+in /etc/init.d folder copy this [file] (./gateway/ssh-LoRa-autoreboot-config/lora)
+Then launch in a terminal
 
+#sysv-rc-conf
+
+and select for lora service rcx.d with x 2,3,4,5
 
 
 Testing
@@ -157,6 +156,8 @@ Deployment
 
 In order to access the gateways from CN when they will be installed at home in local networks, it is necessary to install a [reverse ssh tunnel](http://unix.stackexchange.com/questions/46235/how-does-reverse-ssh-tunneling-work).
 
+In /etc/systemd/system folder copy this [file] (./gateway/ssh-LoRa-autoreboot-config/systemd-config)
+Then launch in a terminal
 Add this line to /etc/rc.local:
 ```
 ssh -f -N -T -R22222:localhost:22 ubuntu@217.77.95.65
