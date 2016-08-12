@@ -1,6 +1,6 @@
 [Unit]
 Description=AutoSSH service for a reverse tunnel from SIRIS to localhos
-After=network.target
+After=network-online.target
 
 [Service]
 User=root
