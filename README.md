@@ -58,14 +58,13 @@ Once inside the raspberry, install the LoRa library using this [method](https://
 wget http://www.cooking-hacks.com/media/cooking/images/documentation/raspberry_arduino_shield/raspberrypi2.zip && unzip raspberrypi2.zip && cd cooking/arduPi && chmod +x install_arduPi && ./install_arduPi && rm install_arduPi && cd ../..
 wget http://www.cooking-hacks.com/media/cooking/images/documentation/tutorial_SX1272/arduPi-api_LoRa_v1_4.zip && unzip -u arduPi-api_LoRa_v1_4.zip && cd cooking/examples/LoRa && chmod +x cook.sh && cd ../../..  
 ```
-
-Install additional softwares:
+Istall additional softwares:
 
 ```
 sudo apt-get autossh
 sudo apt-get install sysv-rc-conf -y
 ```
-Import Node-Red logic with Export/Import via clipboard from another Gateway already up&running
+
 
 ### Sensor node
 
