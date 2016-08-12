@@ -33,7 +33,8 @@ char messageCheck[100];
 char pattern[200];
 
 //Setting pattern for measurement row. E.g.: Ax|H=58.40|TA=22.80|TB=22.70|P=96901.00|L=711|N=41
-const char * dataregularexpr="([A-Za-z])\\w+\\|H=[0-9]+(.[0-9]*)\\|TA=[0-9]+(.[0-9]*)\\|TB=[0-9]+(.[0-9]*)\\|P=[0-9]+(.[0-9]*)\\|L=[0-9]+(.[0-9]*)\\|N=[0-9]+(.[0-9]*)";
+//const char * dataregularexpr="([A-Za-z])\\+\\|H=[0-9]+((\\.[0-9]+)?)\\|TA=[0-9]+((\\.[0-9]+)?)\\|TB=[0-9]+((\\.[0-9]+)?)\\|P=[0-9]+((\\.[0-9]+)?)\\|L=[0-9]+((\\.[0-9]+)?)\\|N=[0-9]+((\\.[0-9]+)?)";
+const char * dataregularexpr="([A-Za-z][0-9])+|H=[0-9]+((.[0-9]+)?)|TA=[0-9]+((.[0-9]+)?)|TB=[0-9]+((.[0-9]+)?)|P=[0-9]+((.[0-9]+)?)|L=[0-9]+((.[0-9]+)?)|N=[0-9]+((.[0-9]+)?)";
 
 void setup()
 {
@@ -93,42 +94,52 @@ match(const char *string, char *pattern)
      
     if (regcomp(&re, pattern, REG_EXTENDED|REG_NOSUB) != 0) {
         //printf("no Match\n");
-        return(0);      /* Report error. */
+        return(0);      /* Report error.*/ 
     }
+
     status = regexec(&re, string, (size_t) 0, NULL, 0);
     regfree(&re);
     if (status != 0) {
-        //printf("no Match 2\n");
-        return(0);      /* Report error. */
+       //printf("no Match 2\n");
+        return(0);      /* Report error.*/
     }
+    //printf("Match\n");
     return(1);
 }
 
 void loop(void)
 {
+  //int pos=0;
   // Receive message
   e = sx1272.receivePacketTimeout(10000);
   if ( e == 0 )
   {
     printf("Receive packet, state %d\n",e);
 
-    for (unsigned int i = 0; i < sx1272.packet_received.length; i++)
+    //packet length = packet_received-header (5 characters)
+    for (unsigned int i = 0; i < sx1272.packet_received.length-5; i++)
     {
       my_packet[i] = (char)sx1272.packet_received.data[i];
+    //pos =i; 
+    //printf("got:%i-->%c\n", i, my_packet[i]);
     }
+    //my_packet[pos +1]='\0';
     printf("Message: %s\n", my_packet);
     //add measures from LoRa Gateway to textfile
-    strcpy(messageCheck, my_packet);
-    if (match (messageCheck, pattern) !=0) { 
-      printf("measurement row found\n");
+    strcpy(messageCheck, my_packet); 
+    if (match (messageCheck, pattern) != 0) { 
+      //printf("measurement row found\n");
       FILE *file;
       file = fopen("/root/cooking/examples/LoRa/measures.txt", "w");
       fputs(my_packet, file);
+      //fflush(file);
+      //fputc('\0', file);
       fclose(file);
+      //printf("mesurement written!\n");
     }
   }
   else {
-    //printf("Receive packet, state %d\n",e);
+   // printf("Receive packet, state %d\n",e);
   }
 }
 
