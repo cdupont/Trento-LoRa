@@ -164,12 +164,14 @@ In /etc/systemd/system folder copy this [file] (./gateway/ssh-LoRa-autoreboot-co
 Then launch in a terminal:
 
 $ systemctl daemon-reload
+
 $ systemctl start autossh.service
+
 $ systemctl status autossh.service (In order to check if the autossh service is running correctly)
+
 $ systemctl enable autossh.service (Enable autossh.service to be started on bootup)
 
-You can now reboot the gateway
-
+You can now reboot the gateway.
 This will create a reverse tunnel from the raspberry to the server at 217.77.95.65 (in this case a SIRIS VM).
 Then from the SIRIS VM it is possible to ssh to the raspberry:
 
