@@ -97,7 +97,6 @@ cd cooking/examples/LoRa
 
 ```
 create the file measures.txt
-
 ```
 ./cook.sh LoRa_gateway_RX.cpp
 ./LoRa_gateway_RX.cpp_exe
