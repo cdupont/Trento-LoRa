@@ -171,9 +171,9 @@ void loop(void)
     stringvalue += "N=";
     stringvalue += noiseValue;
     Serial.println(stringvalue);
-    Serial.println(stringvalue.length());
+    //Serial.println(stringvalue.length());
     //stringvalue.toCharArray(message1, 60);
-    stringvalue.toCharArray(message1, stringvalue.length()+1);
+    //stringvalue.toCharArray(message1, stringvalue.length()+1);
     Serial.println(message1);
     
     // Send (Broadcast) message1 and print the result
