@@ -58,11 +58,11 @@ Once inside the raspberry, install the LoRa library using this [method](https://
 wget http://www.cooking-hacks.com/media/cooking/images/documentation/raspberry_arduino_shield/raspberrypi2.zip && unzip raspberrypi2.zip && cd cooking/arduPi && chmod +x install_arduPi && ./install_arduPi && rm install_arduPi && cd ../..
 wget http://www.cooking-hacks.com/media/cooking/images/documentation/tutorial_SX1272/arduPi-api_LoRa_v1_4.zip && unzip -u arduPi-api_LoRa_v1_4.zip && cd cooking/examples/LoRa && chmod +x cook.sh && cd ../../..  
 ```
-
-Install additional softwares:
+Istall additional softwares:
 
 ```
-sudo apt-get install vim tmux
+sudo apt-get autossh
+sudo apt-get install sysv-rc-conf -y
 ```
 
 
@@ -94,6 +94,10 @@ Start the receiver program from the LoRa examples:
 ```
 ssh root@192.168.8.71
 cd cooking/examples/LoRa
+
+```
+create the file measures.txt
+```
 ./cook.sh LoRa_gateway_RX.cpp
 ./LoRa_gateway_RX.cpp_exe
 ```
@@ -102,7 +106,7 @@ You should see the messages being received.
 Now open your browser using the given IP:
 
 ```
-firefox http://192.168.8.71/
+http://192.168.8.71/
 ```
 
 This should display the Node-RED interface.
@@ -114,13 +118,17 @@ The data is uploaded on the RaptorBox website.
 Configuration
 -------------
 
-In order to restart when the gateway in rebooted, the sender program need to be started at boot-up:
+In order to restart LoRa when the gateway in rebooted, the sender program need to be started at boot-up:
 
-In /etc/rc.local, add:
-```
-tmux new-session -d "/root/cooking/examples/LoRa/LoRa_gateway_RX.cpp_exe &"
-```
+in /etc/init.d folder copy this [file] (./gateway/ssh-LoRa-autoreboot-config/lora)
 
+Then launch in a terminal
+
+$ sysv-rc-conf
+
+and select for lora service rcx.d with x 2,3,4,5
+
+Now you can reboot the gtateway and the LoRa sender will start automatically.
 
 
 Testing
@@ -151,16 +159,26 @@ Deployment
 
 In order to access the gateways from CN when they will be installed at home in local networks, it is necessary to install a [reverse ssh tunnel](http://unix.stackexchange.com/questions/46235/how-does-reverse-ssh-tunneling-work).
 
-Add this line to /etc/rc.local:
-```
-ssh -f -N -T -R22222:localhost:22 ubuntu@217.77.95.65
-```
+In /etc/systemd/system folder copy this [file] (./gateway/ssh-LoRa-autoreboot-config/autossh.service)
+
+Then launch in a terminal:
+
+$ systemctl daemon-reload
+
+$ systemctl start autossh.service
+
+$ systemctl status autossh.service (In order to check if the autossh service is running correctly)
+
+$ systemctl enable autossh.service (Enable autossh.service to be started on bootup)
+
+You can now reboot the gateway.
 This will create a reverse tunnel from the raspberry to the server at 217.77.95.65 (in this case a SIRIS VM).
 Then from the SIRIS VM it is possible to ssh to the raspberry:
+
 ```
 ssh -p 22222 root@localhost
 ```
-The tunnel port (22222) need to be different for each gateway.
+The tunnel port (22221,2,3,4) need to be different for each gateway.
 
 
 

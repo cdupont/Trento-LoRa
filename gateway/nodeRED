@@ -1,105 +1,103 @@
 [
-    {
-        "id": "cffa780e.82c2d8",
-        "type": "watch",
-        "name": "measures.txt",
-        "files": "/root/cooking/examples/LoRa",
-        "x": 78,
-        "y": 41,
-        "z": "c3aed0d3.3ce58",
-        "wires": [
-            [
-                "cfaa229e.74bec"
-            ]
-        ]
-    },
-    {
-        "id": "cfaa229e.74bec",
-        "type": "exec",
-        "command": "tail --line 1 /root/cooking/examples/LoRa/measures.txt",
-        "addpay": false,
-        "append": "",
-        "useSpawn": "",
-        "name": "ExtractMeasure",
-        "x": 272,
-        "y": 41,
-        "z": "c3aed0d3.3ce58",
-        "wires": [
-            [
-                "e22ab56.ac89b48",
-                "23b25f0f.4f04c"
-            ],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "e22ab56.ac89b48",
-        "type": "debug",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "payload",
-        "x": 592,
-        "y": 28,
-        "z": "c3aed0d3.3ce58",
-        "wires": []
-    },
-    {
-        "id": "23b25f0f.4f04c",
-        "type": "function",
-        "name": "measuresFormatter",
-        "func": "\nvar measures = msg.payload.split('|') ;\n\nvar x = {\n    channels: {\n        humidity: measures[1].split(\"=\")[1]*1,\n        temperature: measures[2].split(\"=\")[1]*1,\n        pressure: measures[4].split(\"=\")[1]*1,\n        light: measures[5].split(\"=\")[1]*1,\n        noise: measures[6].split(\"=\")[1]*1,\n    }\n}\n\nreturn {\n    method:\"PUT\",\n    headers:{\n        Authorization:\"Bearer 6de3a20384d73a9fa3a34ac05276aaf13487241f\"\n    },\n    payload:x\n    \n}\n/*\nif(measures[0].match(/Ax/g)) {\n  return [jsonmsg, \"NULL\"];\n} else if (measures[0].match(/Ay/g)) {\n    return [\"NULL\", jsonmsg]\n}*/",
-        "outputs": "1",
-        "noerr": 0,
-        "x": 479,
-        "y": 227,
-        "z": "c3aed0d3.3ce58",
-        "wires": [
-            [
-                "156234f4.b8aefb",
-                "2bfcc69d.411aaa"
-            ]
-        ]
-    },
-    {
-        "id": "156234f4.b8aefb",
-        "type": "debug",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "true",
-        "x": 732,
-        "y": 227,
-        "z": "c3aed0d3.3ce58",
-        "wires": []
-    },
-    {
-        "id": "2bfcc69d.411aaa",
-        "type": "http request",
-        "name": "",
-        "method": "use",
-        "ret": "txt",
-        "url": "http://api.raptorbox.eu/19d8373c-0803-4413-82d0-fffbf8510f1d/streams/environmentaldata",
-        "x": 723,
-        "y": 355,
-        "z": "c3aed0d3.3ce58",
-        "wires": [
-            [
-                "37ba8a24.a537a6"
-            ]
-        ]
-    },
-    {
-        "id": "37ba8a24.a537a6",
-        "type": "debug",
-        "name": "",
-        "active": false,
-        "console": "false",
-        "complete": "true",
-        "x": 938,
-        "y": 441,
-        "z": "c3aed0d3.3ce58",
-        "wires": []
-    }
+  {
+    "id":"cffa780e.82c2d8",
+    "type":"watch",
+    "name":"measures.txt",
+    "files":"/root/cooking/examples/LoRa",
+    "x":78,
+    "y":41,
+    "z":"c3aed0d3.3ce58",
+    "wires":[
+      [
+        "cfaa229e.74bec"
+      ]
+    ]
+  },
+  {
+    "id":"cfaa229e.74bec",
+    "type":"exec",
+    "command":"tail --line 1 /root/cooking/examples/LoRa measures.txt",
+    "addpay":false,
+    "append":"",
+    "useSpawn":"",
+    "name":"ExtractMeasure",
+    "x":308,
+    "y":41,
+    "z":"c3aed0d3.3ce58",
+    "wires":[
+      [
+        "23b25f0f.4f04c",
+        "e22ab56.ac89b48"
+      ],
+      [],
+      []
+    ]
+  },
+  {
+    "id":"e22ab56.ac89b48",
+    "type":"debug","name":"",
+    "active":true,
+    "console":"false",
+    "complete":"payload",
+    "x":592,
+    "y":28,
+    "z":"c3aed0d3.3ce58",
+    "wires":[]
+  },
+  {
+    "id":"23b25f0f.4f04c",
+    "type":"function",
+    "name":"measuresFormatter",
+    "func":"\nvar measures = msg.payload.split('|') ;\n\nvar x = {\n    channels: {\n        sensorID: measures[0],\n        humidity: measures[1].split(\"=\")[1]*1,\n        temperature: measures[2].split(\"=\")[1]*1,\n        pressure: measures[4].split(\"=\")[1]*1,\n        light: measures[5].split(\"=\")[1]*1,\n        noise: measures[6].split(\"=\")[1]*1,\n    },\n    lastUpdate: Math.round((new Date()).getTime() / 1000)\n}\n\nreturn {\n    method:\"PUT\",\n    headers:{\n        Authorization:\"Bearer ecd8b29fe3e3029079c88af49ccc9a3dc9368bcd\"\n    },\n    payload:x\n    \n}\n/*\nif(measures[0].match(/Ax/g)) {\n  return [jsonmsg, \"NULL\"];\n} else if (measures[0].match(/Ay/g)) {\n    return [\"NULL\", jsonmsg]\n}*/",
+    "outputs":"1",
+    "noerr":0,
+    "x":289,
+    "y":244,
+    "z":"c3aed0d3.3ce58",
+    "wires":[
+      [
+        "156234f4.b8aefb",
+        "2bfcc69d.411aaa"
+      ]
+    ]
+  },
+  {
+    "id":"156234f4.b8aefb",
+    "type":"debug","name":"",
+    "active":false,
+    "console":"false",
+    "complete":"true",
+    "x":535,
+    "y":189,
+    "z":"c3aed0d3.3ce58",
+    "wires":[]
+  },
+  {
+    "id":"2bfcc69d.411aaa",
+    "type":"http request",
+    "name":"",
+    "method":"use",
+    "ret":"txt",
+    "url":"http://api.raptorbox.eu/19d8373c-0803-4413-82d0-fffbf8510f1d/streams/environmentaldata",
+    "x":472,
+    "y":365,
+    "z":"c3aed0d3.3ce58",
+    "wires":[
+      [
+        "37ba8a24.a537a6"
+      ]
+    ]
+  },
+  {
+    "id":"37ba8a24.a537a6",
+    "type":"debug",
+    "name":"",
+    "active":false,
+    "console":"false",
+    "complete":"true",
+    "x":701,
+    "y":417,
+    "z":"c3aed0d3.3ce58",
+    "wires":[]
+  }
 ]

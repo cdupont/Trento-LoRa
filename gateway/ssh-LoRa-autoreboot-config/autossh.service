@@ -1,0 +1,11 @@
+[Unit]
+Description=AutoSSH service for a reverse tunnel from SIRIS to localhos
+After=network-online.target
+
+[Service]
+User=root
+Environment="AUTOSSH_GATETIME=0"
+ExecStart=/usr/bin/autossh -M 0 -N -T -q -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -R 22221:localhost:22 ubuntu@217.77.95.65
+
+[Install]
+WantedBy=multi-user.target

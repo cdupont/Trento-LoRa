@@ -43,7 +43,7 @@
 
 //modify this to transmit based on an interval
 //#define INTERVAL 300000   //trasnmit every X minutes (5 here as en example)
-#define INTERVAL 3000   // test of transmission
+#define INTERVAL 10000   // test of transmission
 #define DHTPIN A0         // what pin we're connected to for TEMPERATURE and HUMIDITY SENSOR
 #define LIGHTPIN A1       // what pin we're connected to for LIGHT SENSOR
 #define NOISEPIN A2    // what pin we're connected to for NOISE SENSOR
@@ -53,7 +53,7 @@
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 
 //UNIQUE ID for ARDUINO; modify this accordingly
-String sensor_ID = "Ax";
+String sensor_ID = "A4";
 
 //modify to set the sensor value change threshold
 //if the new sensor value differs for more then the
@@ -135,18 +135,19 @@ void loop(void)
    Serial.print(altitude, 2); //display 2 decimal places
    Serial.println(" m");
    Serial.println();*/
-
+   
     //Reading light from LIGHTPIN
+    Serial.print(F("-----------------\n"));
     int lightValue = analogRead(LIGHTPIN); 
-    Serial.print("Light: ");
-    Serial.print(lightValue);
-    Serial.println();
+    //Serial.print("Light: ");
+    //Serial.print(lightValue);
+    //Serial.println();
 
     //Reading noise from NOPISEPIN
     int noiseValue = analogRead(NOISEPIN); 
-    Serial.print("Noise: ");
-    Serial.print(noiseValue);
-    Serial.println();
+    //Serial.print("Noise: ");
+    //Serial.print(noiseValue);
+    //Serial.println();
 
     //Creation of LoRa Message
     stringvalue = sensor_ID;
@@ -170,10 +171,13 @@ void loop(void)
     stringvalue += "N=";
     stringvalue += noiseValue;
     Serial.println(stringvalue);
-    //Serial.println(stringvalue.length());
-    stringvalue.toCharArray(message1, 60);
-
+    Serial.println(stringvalue.length());
+    //stringvalue.toCharArray(message1, 60);
+    stringvalue.toCharArray(message1, stringvalue.length()+1);
+    Serial.println(message1);
+    
     // Send (Broadcast) message1 and print the result
+    Serial.print(F("Sending packet\n"));
     e = sx1272.sendPacketTimeout(0, message1);
     Serial.print(F("Packet sent, state "));
     Serial.println(e, DEC);
@@ -234,4 +238,3 @@ void powerLoRaOn() {
 void powerLoRaOff() {
  sx1272.OFF();
 }
-
