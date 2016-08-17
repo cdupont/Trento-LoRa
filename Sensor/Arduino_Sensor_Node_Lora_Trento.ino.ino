@@ -53,7 +53,7 @@
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 
 //UNIQUE ID for ARDUINO; modify this accordingly
-String sensor_ID = "A4";
+String sensor_ID = "Ax";
 
 //modify to set the sensor value change threshold
 //if the new sensor value differs for more then the
