@@ -117,7 +117,7 @@ void loop(void)
     printf("Receive packet, state %d\n",e);
 
     //packet length = packet_received-header (5 characters)
-    for (unsigned int i = 0; i < sx1272.packet_received.length-5; i++)
+    for (unsigned int i = 0; i < sx1272.packet_received.length; i++)
     {
       my_packet[i] = (char)sx1272.packet_received.data[i];
     //pos =i; 
