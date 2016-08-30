@@ -55,10 +55,6 @@
 //UNIQUE ID for ARDUINO; modify this accordingly
 String sensor_ID = "Ax";
 
-//modify to set the sensor value change threshold
-//if the new sensor value differs for more then the
-//defined threshold, a transmition will occur
-
 int e;
 char message1[60];
 
@@ -96,7 +92,6 @@ void setup()
 void loop(void)
 {
 
-
   time = millis();
   //check if it's time to transmit:
   if(time - temp > INTERVAL) {
@@ -105,8 +100,7 @@ void loop(void)
     //power LoRa ON:
     //powerLoRaOn();
 
-
-// Reading temperature or humidity takes about 250 milliseconds!
+    // Reading temperature or humidity takes about 250 milliseconds!
     // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
     float h = dht.readHumidity();
     float t = dht.readTemperature();
@@ -122,19 +116,6 @@ void loop(void)
    pressure = myBarometer.bmp085GetPressure(myBarometer.bmp085ReadUP());//Get the temperature
    altitude = myBarometer.calcAltitude(pressure); //Uncompensated calculation - in Meters 
    atm = pressure / 101325; 
-  
-   /*Serial.print("Temperature: ");
-   Serial.print(temperature, 2); //display 2 decimal places
-   Serial.println("deg C");
-   Serial.print("Pressure: ");
-   Serial.print(pressure, 0); //whole number only.
-   Serial.println(" Pa");
-   Serial.print("Ralated Atmosphere: ");
-   Serial.println(atm, 4); //display 4 decimal places
-   Serial.print("Altitude: ");
-   Serial.print(altitude, 2); //display 2 decimal places
-   Serial.println(" m");
-   Serial.println();*/
    
     //Reading light from LIGHTPIN
     Serial.print(F("-----------------\n"));
@@ -154,7 +135,6 @@ void loop(void)
     stringvalue += "|";
     stringvalue += "H=";
     stringvalue += h;
-    //Temperature
     stringvalue += "|";
     stringvalue += "TA=";
     stringvalue += t;
@@ -175,6 +155,9 @@ void loop(void)
     stringvalue.toCharArray(message1, 60);
     //stringvalue.toCharArray(message1, stringvalue.length()+1);
     //Serial.println(message1);
+    
+    //power LoRa ON:
+    //powerLoRaOn();
     
     // Send (Broadcast) message1 and print the result
     Serial.print(F("Sending packet\n"));
@@ -237,4 +220,5 @@ void powerLoRaOn() {
 
 void powerLoRaOff() {
  sx1272.OFF();
+ Serial.println(F("SX1272 module is OFF"));
 }
