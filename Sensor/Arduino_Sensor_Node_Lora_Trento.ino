@@ -79,7 +79,7 @@ void setup()
   // Print a start message
   Serial.println(F("SX1272 module and Arduino: send packets without ACK"));
   
-  powerLoRaOn();
+  //powerLoRaOn();
 
   Serial.println(F("Temperature and Humidity sensors seetup"));
   dht.begin();
@@ -157,7 +157,7 @@ void loop(void)
     //Serial.println(message1);
     
     //power LoRa ON:
-    //powerLoRaOn();
+    powerLoRaOn();
     
     // Send (Broadcast) message1 and print the result
     Serial.print(F("Sending packet\n"));
@@ -166,7 +166,7 @@ void loop(void)
     Serial.println(e, DEC);
 
     //power LoRa OFF:
-    //powerLoRaOff();
+    powerLoRaOff();
   
   }
 
