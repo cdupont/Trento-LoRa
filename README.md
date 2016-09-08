@@ -180,6 +180,19 @@ ssh -p 22222 root@localhost
 ```
 The tunnel port (22221,2,3,4) need to be different for each gateway.
 
+Eventually in order to both connect directly to the GWs and to be able to show the NodeRed page on your browser, you can performe one giant SSH command using the -t flag to chain commands:
+
+To connect to GW:
+```
+ssh -L 8080:localhost:8080 vmlora -t ssh -L 8080:localhost:80 -p 22224 pi@localhost
+```
+To open NodeRed web page:
+```
+http://localhost:8080
+```
+
+
+
 
 
 
