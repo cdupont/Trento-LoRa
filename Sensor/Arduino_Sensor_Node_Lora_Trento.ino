@@ -43,7 +43,7 @@
 
 //modify this to transmit based on an interval
 //#define INTERVAL 300000   //trasnmit every X minutes (5 here as en example)
-#define INTERVAL 3000   // test of transmission
+#define INTERVAL 5000   // test of transmission
 #define DHTPIN A0         // what pin we're connected to for TEMPERATURE and HUMIDITY SENSOR
 #define LIGHTPIN A1       // what pin we're connected to for LIGHT SENSOR
 #define NOISEPIN A2    // what pin we're connected to for NOISE SENSOR
